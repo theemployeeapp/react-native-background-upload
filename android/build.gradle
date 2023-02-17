@@ -1,12 +1,11 @@
 buildscript {
     ext {
-        kotlinVersion = '1.6.20'
-        buildToolsVersion = '29.0.2'
-        compileSdkVersion = 29
-        targetSdkVersion = 29
-        minSdkVersion = 18
+       buildToolsVersion = "33.0.0"
+       minSdkVersion = 21
+       compileSdkVersion = 33
+       targetSdkVersion = 33
+       kotlinVersion = '1.8.0'
     }
-    ext.detoxKotlinVersion = ext.kotlinVersion
 
     repositories {
         mavenCentral()
@@ -20,17 +19,19 @@ buildscript {
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
-def DEFAULT_COMPILE_SDK_VERSION = 28
-def DEFAULT_BUILD_TOOLS_VERSION = "28.0.3"
-def DEFAULT_TARGET_SDK_VERSION = 28
+def DEFAULT_COMPILE_SDK_VERSION = 33
+def DEFAULT_BUILD_TOOLS_VERSION = "33.0.0"
+def DEFAULT_TARGET_SDK_VERSION = 33
 
 def safeExtGet(prop, fallback) {
     rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
 }
 
 android {
+     buildFeatures {
+        viewBinding = true
+    }
     compileSdkVersion safeExtGet('compileSdkVersion', DEFAULT_COMPILE_SDK_VERSION)
     buildToolsVersion safeExtGet('buildToolsVersion', DEFAULT_BUILD_TOOLS_VERSION)
 
